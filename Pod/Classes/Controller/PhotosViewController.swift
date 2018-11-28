@@ -205,7 +205,8 @@ final class PhotosViewController : UICollectionViewController {
                 
                 // Load image for preview
                 if let imageView = vc.imageView {
-                    PHCachingImageManager.default().requestImage(for: asset, targetSize:imageView.frame.size, contentMode: .aspectFit, options: options) { (result, _) in
+                    let _targetSize = CGSize(width: imageView.frame.size.width * 2, height: imageView.frame.size.height * 2)
+                    PHCachingImageManager.default().requestImage(for: asset, targetSize:_targetSize, contentMode: .aspectFit, options: options) { (result, _) in
                         imageView.image = result
                     }
                 }
