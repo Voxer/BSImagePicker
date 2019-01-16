@@ -69,18 +69,18 @@ final class AlbumTableViewDataSource : NSObject, UITableViewDataSource {
             let imageContentMode: PHImageContentMode = .aspectFill
             switch idx {
             case 0:
-                PHCachingImageManager.default().requestImage(for: asset, targetSize: imageSize, contentMode: imageContentMode, options: nil) { (result, _) in
+                PHCachingImageManager.default().requestImage(for: asset, targetSize: CGSize(width: imageSize.width * 2, height: imageSize.height * 2), contentMode: imageContentMode, options: nil) { (result, _) in
                     cell.firstImageView.image = result
                     cell.secondImageView.image = result
                     cell.thirdImageView.image = result
                 }
             case 1:
-                PHCachingImageManager.default().requestImage(for: asset, targetSize: imageSize, contentMode: imageContentMode, options: nil) { (result, _) in
+                PHCachingImageManager.default().requestImage(for: asset, targetSize: CGSize(width: imageSize.width * 2, height: imageSize.height * 2), contentMode: imageContentMode, options: nil) { (result, _) in
                     cell.secondImageView.image = result
                     cell.thirdImageView.image = result
                 }
             case 2:
-                PHCachingImageManager.default().requestImage(for: asset, targetSize: imageSize, contentMode: imageContentMode, options: nil) { (result, _) in
+                PHCachingImageManager.default().requestImage(for: asset, targetSize: CGSize(width: imageSize.width * 2, height: imageSize.height * 2), contentMode: imageContentMode, options: nil) { (result, _) in
                     cell.thirdImageView.image = result
                 }
                 
