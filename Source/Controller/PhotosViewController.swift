@@ -67,7 +67,7 @@ final class PhotosViewController : UICollectionViewController {
     
     let settings: BSImagePickerSettings
     
-    fileprivate let doneBarButtonTitle: String = NSLocalizedString("Done", comment: "Done")
+    fileprivate let doneBarButtonTitle: String = NSLocalizedString("Send", comment: "Send")
     
     @objc lazy var albumsViewController: AlbumsViewController = {
         let storyboard = UIStoryboard(name: "Albums", bundle: BSImagePickerViewController.bundle)

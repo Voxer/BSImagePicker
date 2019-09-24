@@ -96,6 +96,7 @@ final class PhotoCollectionViewDataSource : NSObject, UICollectionViewDataSource
                 secondsString.insert("0", at: secondsString.startIndex)
             }
             cell.durationLabel.text =   minutesString + ":" + secondsString
+            cell.durationLabel.isHidden = false
         } else {
             cell.durationLabel.isHidden  = true
         }
