@@ -54,18 +54,38 @@ open class BSImagePickerViewController : UINavigationController {
     
     @objc open lazy var fetchResults: [PHFetchResult] = { () -> [PHFetchResult<PHAssetCollection>] in
         let fetchOptions = PHFetchOptions()
-        
-        // Camera roll fetch result
-        let cameraRollResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: fetchOptions)
-        
+        var results = [PHFetchResult<PHAssetCollection>]()
+        let recentPhotos = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: fetchOptions)
+        results.append(recentPhotos)
+        if #available(iOS 9.0, *) {
+            let selfies = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumSelfPortraits, options: fetchOptions)
+            results.append(selfies)
+        } else {
+            // Fallback on earlier versions
+        }
+        let videos = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: fetchOptions)
+        results.append(videos)
+        let bursts = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumBursts, options: fetchOptions)
+        results.append(bursts)
+        if #available(iOS 9.0, *) {
+            let screenShots = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumScreenshots, options: fetchOptions)
+            results.append(screenShots)
+        } else {
+            // Fallback on earlier versions
+        }
+        let panaroma = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumPanoramas, options: fetchOptions)
+        results.append(panaroma)
         // Albums fetch result
         let albumResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
-        
-        return [cameraRollResult, albumResult]
+        results.append(albumResult)
+
+        return results
     }()
     
     @objc var albumTitleView: UIButton = {
-        let btn =  UIButton(frame: .zero)
+        let width = UIScreen.main.bounds.size.width - 200
+        let rect = CGRect(x: 0, y: 0, width: width, height: 44)
+        let btn =  UIButton(frame: rect)
         btn.setTitleColor(btn.tintColor, for: .normal)
         return btn
     }()

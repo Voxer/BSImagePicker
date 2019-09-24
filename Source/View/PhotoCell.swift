@@ -30,6 +30,7 @@ final class PhotoCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var selectionOverlayView: UIView!
     @IBOutlet weak var selectionView: SelectionView!
+    @IBOutlet weak var durationLabel: UILabel!
     
     @objc weak var asset: PHAsset?
     var settings: BSImagePickerSettings {

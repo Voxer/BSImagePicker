@@ -67,6 +67,9 @@ final class AlbumTableViewDataSource : NSObject, UITableViewDataSource {
         result.enumerateObjects({ (asset, idx, stop) in
             let imageSize = CGSize(width: 79, height: 79)
             let imageContentMode: PHImageContentMode = .aspectFill
+            cell.firstImageView.image = nil
+            cell.secondImageView.image = nil
+            cell.thirdImageView.image = nil
             switch idx {
             case 0:
                 PHCachingImageManager.default().requestImage(for: asset, targetSize: CGSize(width: imageSize.width * 2, height: imageSize.height * 2), contentMode: imageContentMode, options: nil) { (result, _) in

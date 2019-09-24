@@ -82,6 +82,24 @@ final class PhotoCollectionViewDataSource : NSObject, UICollectionViewDataSource
             cell.imageView.image = result
         })
         
+        if  asset.duration > 0 {
+            var totalSeconds = asset.duration
+            if totalSeconds < 0 {
+                totalSeconds = 0
+            }
+            
+            let minutes:Int = Int(totalSeconds / 60)
+            let seconds:Int = Int(totalSeconds) % 60
+            let minutesString = String(minutes)
+            var secondsString = String(seconds)
+            if  seconds < 10 {
+                secondsString.insert("0", at: secondsString.startIndex)
+            }
+            cell.durationLabel.text =   minutesString + ":" + secondsString
+        } else {
+            cell.durationLabel.isHidden  = true
+        }
+        
         // Set selection number
         if let index = selections.index(of: asset) {
             if let character = settings?.selectionCharacter {
