@@ -256,7 +256,7 @@ final class PhotosViewController : UICollectionViewController {
         fetchOptions.sortDescriptors = [
             NSSortDescriptor(key: "creationDate", ascending: false)
         ]
-        fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+        fetchOptions.predicate = NSPredicate(format: "(mediaType = %d) OR (mediaType = %d)", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
         initializePhotosDataSourceWithFetchResult(PHAsset.fetchAssets(in: album, options: fetchOptions), selections: selections)
     }
     

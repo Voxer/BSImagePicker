@@ -61,15 +61,14 @@ final class AlbumTableViewDataSource : NSObject, UITableViewDataSource {
         fetchOptions.sortDescriptors = [
             NSSortDescriptor(key: "creationDate", ascending: false)
         ]
-        fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-        
+        fetchOptions.predicate = NSPredicate(format: "(mediaType = %d) OR (mediaType = %d)", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
+        cell.firstImageView.image = nil
+        cell.secondImageView.image = nil
+        cell.thirdImageView.image = nil
         let result = PHAsset.fetchAssets(in: album, options: fetchOptions)
         result.enumerateObjects({ (asset, idx, stop) in
             let imageSize = CGSize(width: 79, height: 79)
             let imageContentMode: PHImageContentMode = .aspectFill
-            cell.firstImageView.image = nil
-            cell.secondImageView.image = nil
-            cell.thirdImageView.image = nil
             switch idx {
             case 0:
                 PHCachingImageManager.default().requestImage(for: asset, targetSize: CGSize(width: imageSize.width * 2, height: imageSize.height * 2), contentMode: imageContentMode, options: nil) { (result, _) in
